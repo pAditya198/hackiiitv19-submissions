@@ -1,3 +1,5 @@
+import 'package:cmms/models/location.dart';
+
 class User {
   User() {
     this.isAdmin = false;
@@ -6,5 +8,5 @@ class User {
   String uid;
   int phone;
   String name;
-  String location;
+  Location location = new Location();
 }

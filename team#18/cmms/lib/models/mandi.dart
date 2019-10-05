@@ -1,7 +1,10 @@
-import 'package:cmms/models/GjGandhinagarPrayagraj.dart';
+import 'package:cmms/models/commodities.dart';
 
 class Mandi {
   String state;
   String district;
-  GjGandhinagarPrayagraj mandi = new GjGandhinagarPrayagraj();
+  String mandi;
+  int farmers;
+  int traders;
+  Commodities commodities = new Commodities();
 }

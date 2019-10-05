@@ -5,6 +5,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MandiScaffold(
+      isClickable: true,
       title: "Loading",
       body: Center(
         child: CircularProgressIndicator(),

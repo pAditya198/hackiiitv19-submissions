@@ -22,6 +22,7 @@ dependencies:
   firebase_auth: ^0.11.1+12
   cloud_firestore: ^0.12.9+4
   shared_preferences: ^0.5.3+4
+  flutter_spinkit: ^4.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -45,8 +46,11 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/
+  #  - Farmer-Icon-min.png
+   # - com.creatorscorp.krushidhan.png
+    #- Image-7.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

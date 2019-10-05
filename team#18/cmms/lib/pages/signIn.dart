@@ -25,6 +25,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return MandiScaffold(
+      isClickable: true,
       title: "Sign In",
       body: SingleChildScrollView(
         child: Padding(

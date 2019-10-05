@@ -14,13 +14,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<String> states = ["GJ", "MP", "UP", "JK"];
+  List<String> district = ["gandhinagar", "ahmedabad", "himmatnagar"];
+  List<String> mandiName = ["sundar", "prayagraj"];
+
   @override
   Widget build(BuildContext context) {
     return MandiScaffold(
+      isClickable: true,
       title: "Home Page",
       body: FutureBuilder<QuerySnapshot>(
         future: Firestore.instance.collection("mandi").getDocuments(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting ||
               snapshot.connectionState == ConnectionState.none) {
             return Center(
@@ -36,6 +41,14 @@ class _HomePageState extends State<HomePage> {
                 ),
               );
             } else {
+              //the logic starts here
+              // print(snapshot.data.documents.first.data["commodities"].length);
+              // print(snapshot.data.documents.length);
+              // for (int i = 0;
+              //     i < snapshot.data.documents.first.data["commodities"].length;
+              //     i++) {
+              // states.add(snapshot.data.documents.length)
+              // }
               return Container();
             }
           }

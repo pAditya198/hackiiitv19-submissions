@@ -1,3 +1,4 @@
+import 'package:cmms/pages/register.dart';
 import 'package:cmms/utils/mandiScaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -66,6 +67,7 @@ class _SignInState extends State<SignIn> {
                   if (value.length != 10) {
                     return "Please enter 10 digits";
                   }
+                  return null;
                 },
                 decoration: InputDecoration(
                   errorStyle: TextStyle(color: Colors.white),
@@ -127,7 +129,10 @@ class _SignInState extends State<SignIn> {
                   ),
                 ),
                 onPressed: () {
-                  _verifyPhoneNumber();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Register()),
+                  );
                 },
               ),
             ],

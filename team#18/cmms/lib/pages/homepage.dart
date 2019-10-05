@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cmms/models/mandi.dart';
 import 'package:cmms/utils/mandiScaffold.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -20,11 +21,13 @@ class _HomePageState extends State<HomePage> {
 
   String stateValue = "GJ";
   String districtValue = "gandhinagar";
-  String mandiValue = "prayagraj";
+  // String mandiValue = "prayagraj";
   String commodityValue = "jute";
 
   Future<QuerySnapshot> _mandiFuture;
   Future<QuerySnapshot> _statesFuture;
+
+  List<Mandi> availableMandis;
 
   @override
   void initState() {
@@ -106,17 +109,34 @@ class _HomePageState extends State<HomePage> {
                         child: Text("Error"),
                       );
                     } else {
+                      // final mandi = Mandi();
+                      //     mandiFromJson(snapshot.data.data.toString());
                       print("Accessing document: " +
                           stateValue +
                           "-" +
                           districtValue);
 
-                      print(snapshot.data["mandisList"]);
-                      print(snapshot.data["mandis"]);
+                      // Mandi.fromJson(Map.fromEntries(snapshot.data.data));
+                      Mandi.fromJson(snapshot.data.data);
+
+                      // print(snapshot.data["mandis"].length);
+                      // print(snapshot.data["mandis"][0]);
+                      // print(snapshot.data["mandis"]);
+                      // for (int i = 0; i < snapshot.data["mandis"].length; i++) {
+                      // print("index $i  ${snapshot.data["mandis"][i]}");
+                      // for (int j = 0;
+                      //     j < snapshot.data["mandis"]["commodities"];
+                      //     j++) {}
+                      // print(
+                      //     "index $i  ${snapshot.data["mandis"][i]["commodities"]}");
+                      // print("index $i  ${snapshot.data.data}");
+                      // availableMandis[i].toJson();
+                      // print(mandi.mandis);
+                      // }
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
+                        children: <Widget>[
                           ListTile(),
                         ],
                       );
@@ -133,37 +153,37 @@ class _HomePageState extends State<HomePage> {
 
   List<ListTile> giveListTiles() {}
 
-  List<TableRow> completetable(AsyncSnapshot<QuerySnapshot> snapshot) {
-    List<TableRow> row = List<TableRow>();
-    row.add(tableHeader());
-    for (int i = 0; i < 2; i++) {
-      // row.add(tableElements(snapshot));
-    }
-    return row;
-  }
+  // List<TableRow> completetable(AsyncSnapshot<QuerySnapshot> snapshot) {
+  //   List<TableRow> row = List<TableRow>();
+  //   row.add(tableHeader());
+  //   for (int i = 0; i < 2; i++) {
+  //     // row.add(tableElements(snapshot));
+  //   }
+  //   return row;
+  // }
 
-  TableRow tableHeader() {
-    return TableRow(
-      children: <Widget>[
-        Text("Mandi"),
-        Text("Commodity"),
-        Text("Price"),
-        Text("Supply"),
-        Text("Demand"),
-      ],
-    );
-  }
+  // TableRow tableHeader() {
+  //   return TableRow(
+  //     children: <Widget>[
+  //       Text("Mandi"),
+  //       Text("Commodity"),
+  //       Text("Price"),
+  //       Text("Supply"),
+  //       Text("Demand"),
+  //     ],
+  //   );
+  // }
 
-  TableRow tableElements(AsyncSnapshot<DocumentSnapshot> snapshot) {
-    // print(snapshot.data.documentID);
-    return TableRow(
-      children: <Widget>[
-        Text("sundar"),
-        Text("${snapshot.data["name"]}"),
-        Text("${snapshot.data["price_modal"]}"),
-        Text("${snapshot.data["supply"]}"),
-        Text("${snapshot.data["demand"]}"),
-      ],
-    );
-  }
+  // TableRow tableElements(AsyncSnapshot<DocumentSnapshot> snapshot) {
+  //   // print(snapshot.data.documentID);
+  //   return TableRow(
+  //     children: <Widget>[
+  //       Text("sundar"),
+  //       Text("${snapshot.data["name"]}"),
+  //       Text("${snapshot.data["price_modal"]}"),
+  //       Text("${snapshot.data["supply"]}"),
+  //       Text("${snapshot.data["demand"]}"),
+  //     ],
+  //   );
+  // }
 }

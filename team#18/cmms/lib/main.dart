@@ -9,6 +9,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Tools.signInHandler(),
+      theme: ThemeData(
+        buttonColor: Colors.green,
+      ),
     );
   }
 }

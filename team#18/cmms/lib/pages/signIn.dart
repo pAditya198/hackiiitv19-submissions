@@ -1,6 +1,7 @@
 import 'package:cmms/utils/mandiScaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -12,6 +13,7 @@ class _SignInState extends State<SignIn> {
   FirebaseAuth _auth;
   FirebaseUser user;
   UserUpdateInfo userInfo;
+  FocusNode _numberNode = FocusNode();
 
   @override
   void initState() {
@@ -23,28 +25,114 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return MandiScaffold(
-      title: "Sign In",
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextField(
-              controller: _phoneController,
-            ),
-            RaisedButton(
-              child: Text("Sign in"),
-              onPressed: () {
-                _verifyPhoneNumber();
-              },
-            ),
-          ],
-        ),
-      ),
-    );
+        title: "Sign In",
+        body: Padding(
+          padding: EdgeInsets.fromLTRB(20, 80, 20, 0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                height: 200.0,
+                width: 200.0,
+                decoration: new BoxDecoration(
+                  image: DecorationImage(
+                    image: new AssetImage(
+                        'assets/com.creatorscorp.krushidhan.png'),
+                    fit: BoxFit.fill,
+                  ),
+                  shape: BoxShape.circle,
+                ),
+              ),
+              Container(
+                height: 50,
+              ),
+              TextFormField(
+                controller: _phoneController,
+                focusNode: _numberNode,
+                maxLength: 10,
+                keyboardType: TextInputType.phone,
+                inputFormatters: [
+                  WhitelistingTextInputFormatter(
+                    RegExp("[0-9]"),
+                  ),
+                ],
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return "Please enter your phone number";
+                  }
+                  if (value.length != 10) {
+                    return "Please enter 10 digits";
+                  }
+                },
+                decoration: InputDecoration(
+                  errorStyle: TextStyle(color: Colors.white),
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12.0),
+                    ),
+                    borderSide: BorderSide(
+                      color: Colors.white,
+                      width: 0,
+                    ),
+                  ),
+                  hintText: "10-digit mobile number",
+                ),
+              ),
+              MaterialButton(
+                child: Text(
+                  "Sign in",
+                  style: TextStyle(color: Colors.white),
+                ),
+                height: 40,
+                minWidth: 200,
+                color: Colors.green,
+                shape: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(27)),
+                  borderSide: BorderSide(
+                    color: Colors.white,
+                    width: 0,
+                  ),
+                ),
+                onPressed: () {
+                  _verifyPhoneNumber();
+                },
+              ),
+              Container(
+                margin: new EdgeInsets.fromLTRB(0, 10, 0, 0),
+                height: 30,
+                child: Text(
+                  "Or",
+                  style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              MaterialButton(
+                child: Text(
+                  "Register",
+                  style: TextStyle(color: Colors.white),
+                ),
+                height: 40,
+                minWidth: 200,
+                color: Colors.green,
+                shape: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(27)),
+                  borderSide: BorderSide(
+                    color: Colors.white,
+                    width: 0,
+                  ),
+                ),
+                onPressed: () {
+                  _verifyPhoneNumber();
+                },
+              ),
+            ],
+          ),
+        ));
   }
 
   Future<void> _verifyPhoneNumber() async {
-    // print("Phone: ${_countryCode + _phoneNumberController.text}");
     await _auth.verifyPhoneNumber(
       phoneNumber: "+91" + _phoneController.text,
       codeSent: (String verficationID, [int resendcodeTimeout]) {

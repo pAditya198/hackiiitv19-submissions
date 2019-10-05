@@ -22,8 +22,8 @@ class _FarmerFormState extends State<FarmerForm> {
   @override
   Widget build(BuildContext context) {
     return new MandiScaffold(
-      isClickable: true,
-      title: "Farmer Form",
+      isClickable: false,
+      title: "Registration Form",
       body: new Container(
         child: new Form(
           key: _formKey,
@@ -34,14 +34,14 @@ class _FarmerFormState extends State<FarmerForm> {
               new TextFormField(
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.person),
-                  hintText: 'Enter your first and last name',
+                  hintText: 'Enter your full name',
                   labelText: 'Name',
                 ),
               ),
               new TextFormField(
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.phone),
-                  hintText: 'Enter a phone number',
+                  hintText: 'Enter your phone number',
                   labelText: 'Phone',
                 ),
                 keyboardType: TextInputType.phone,

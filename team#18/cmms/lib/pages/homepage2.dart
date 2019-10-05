@@ -90,7 +90,10 @@ class _HomePageState extends State<HomePage> {
               child: StreamBuilder(
                 stream: Firestore.instance
                     .collection("mandi")
-                    .document(stateValue + "-" + districtValue)
+                    .document(
+                        stateValue + "-" + districtValue + "-" + mandiValue)
+                    .collection("commodities")
+                    .document(commodityValue)
                     .snapshots(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.connectionState == ConnectionState.none ||
@@ -109,16 +112,14 @@ class _HomePageState extends State<HomePage> {
                       print("Accessing document: " +
                           stateValue +
                           "-" +
-                          districtValue);
-
-                      print(snapshot.data["mandisList"]);
-                      print(snapshot.data["mandis"]);
+                          districtValue +
+                          "-" +
+                          mandiValue);
+                      print(snapshot.data["name"]);
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          ListTile(),
-                        ],
+                        children: giveListTiles(),
                       );
                     }
                   }

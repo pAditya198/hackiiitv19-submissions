@@ -8,5 +8,5 @@ class User {
   String uid;
   int phone;
   String name;
-  Location location = new Location();
+  // Location location = new Location();
 }

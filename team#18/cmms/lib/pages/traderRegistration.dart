@@ -27,7 +27,7 @@ class _TraderFormState extends State<TraderForm> {
   @override
   Widget build(BuildContext context) {
     return MandiScaffold(
-      isClickable: true,
+      isClickable: false,
       title: "Trader Form",
       body: new Container(
         child: new Form(

@@ -9,6 +9,7 @@ class MandiScaffold extends StatefulWidget {
     @required this.isClickable,
     this.user,
     this.leading,
+    this.floatingButton,
   });
 
   final String title;
@@ -16,6 +17,7 @@ class MandiScaffold extends StatefulWidget {
   final Widget leading;
   final FirebaseUser user;
   final bool isClickable;
+  final Widget floatingButton;
 
   @override
   _MandiScaffoldState createState() => _MandiScaffoldState();
@@ -30,22 +32,26 @@ class _MandiScaffoldState extends State<MandiScaffold> {
         centerTitle: true,
         leading: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return Profile(
-                      user: widget.user,
+          child: widget.isClickable
+              ? GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return Profile(
+                            user: widget.user,
+                          );
+                        },
+                      ),
                     );
                   },
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage("assets/images/wheat.png"),
+                  ),
+                )
+              : CircleAvatar(
+                  backgroundImage: AssetImage("assets/images/wheat.png"),
                 ),
-              );
-            },
-            child: CircleAvatar(
-              backgroundImage: AssetImage("assets/images/wheat.png"),
-            ),
-          ),
         ),
         actions: <Widget>[
           IconButton(
@@ -56,7 +62,11 @@ class _MandiScaffoldState extends State<MandiScaffold> {
           )
         ],
       ),
-      body: widget.body,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: widget.body,
+      ),
+      floatingActionButton: widget.floatingButton,
     );
   }
 }

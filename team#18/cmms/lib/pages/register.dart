@@ -12,7 +12,7 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return MandiScaffold(
-      isClickable: true,
+      isClickable: false,
       title: "Register",
       body: Scaffold(
         body: Column(

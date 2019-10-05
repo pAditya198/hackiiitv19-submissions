@@ -109,31 +109,30 @@ class _HomePageState extends State<HomePage> {
                         child: Text("Error"),
                       );
                     } else {
-                      final mandi = Mandi();
+                      // final mandi = Mandi();
                       //     mandiFromJson(snapshot.data.data.toString());
-                      availableMandis = List<Mandi>();
                       print("Accessing document: " +
                           stateValue +
                           "-" +
                           districtValue);
 
                       // Mandi.fromJson(Map.fromEntries(snapshot.data.data));
-                      print(Mandi.fromJson(snapshot.data.data));
+                      Mandi.fromJson(snapshot.data.data);
 
                       // print(snapshot.data["mandis"].length);
                       // print(snapshot.data["mandis"][0]);
                       // print(snapshot.data["mandis"]);
-                      for (int i = 0; i < snapshot.data["mandis"].length; i++) {
-                        // print("index $i  ${snapshot.data["mandis"][i]}");
-                        // for (int j = 0;
-                        //     j < snapshot.data["mandis"]["commodities"];
-                        //     j++) {}
-                        // print(
-                        //     "index $i  ${snapshot.data["mandis"][i]["commodities"]}");
-                        print("index $i  ${snapshot.data.data}");
-                        // availableMandis[i].toJson();
-                        // print(mandi.mandis);
-                      }
+                      // for (int i = 0; i < snapshot.data["mandis"].length; i++) {
+                      // print("index $i  ${snapshot.data["mandis"][i]}");
+                      // for (int j = 0;
+                      //     j < snapshot.data["mandis"]["commodities"];
+                      //     j++) {}
+                      // print(
+                      //     "index $i  ${snapshot.data["mandis"][i]["commodities"]}");
+                      // print("index $i  ${snapshot.data.data}");
+                      // availableMandis[i].toJson();
+                      // print(mandi.mandis);
+                      // }
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,

@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cmms/utils/mandiScaffold.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class FarmerForm extends StatefulWidget {
   @override
@@ -9,6 +11,13 @@ class FarmerForm extends StatefulWidget {
 
 class _FarmerFormState extends State<FarmerForm> {
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _phoneController = TextEditingController();
+
+  FirebaseAuth _auth;
+  FirebaseUser user;
+  UserUpdateInfo userInfo;
+
   List<String> _states = <String>['', 'GJ', 'MP', 'UP', 'JK'];
   String _state = '';
   List<String> _districts = <String>[
@@ -18,6 +27,13 @@ class _FarmerFormState extends State<FarmerForm> {
     'ahmedabad',
   ];
   String _district = '';
+
+  @override
+  void initState() {
+    _auth = FirebaseAuth.instance;
+    userInfo = UserUpdateInfo();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +48,7 @@ class _FarmerFormState extends State<FarmerForm> {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             children: <Widget>[
               new TextFormField(
+                controller: _nameController,
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.person),
                   hintText: 'Enter your full name',
@@ -39,6 +56,7 @@ class _FarmerFormState extends State<FarmerForm> {
                 ),
               ),
               new TextFormField(
+                controller: _phoneController,
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.phone),
                   hintText: 'Enter your phone number',
@@ -127,10 +145,11 @@ class _FarmerFormState extends State<FarmerForm> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => FarmerForm()),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => FarmerForm()),
+                    // );
+                    _verifyPhoneNumber();
                   },
                 ),
               ),
@@ -138,6 +157,43 @@ class _FarmerFormState extends State<FarmerForm> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> _verifyPhoneNumber() async {
+    await _auth.verifyPhoneNumber(
+      phoneNumber: "+91" + _phoneController.text,
+      codeSent: (String verficationID, [int resendcodeTimeout]) {
+        print("Code Sent to device");
+      },
+      timeout: Duration(seconds: 30),
+      verificationFailed: (AuthException exception) {
+        print("Verification Failed: $exception");
+        Fluttertoast.showToast(
+          msg: "Verification Failed",
+          backgroundColor: Colors.grey,
+          gravity: ToastGravity.BOTTOM,
+        );
+      },
+      verificationCompleted: (AuthCredential credentials) async {
+        print("Phone Verification Complete");
+        await _auth.signInWithCredential(credentials).then((user) {
+          Navigator.of(context).pop();
+          Fluttertoast.showToast(
+            msg: "Succesfully Registered",
+            backgroundColor: Colors.grey,
+            gravity: ToastGravity.BOTTOM,
+          );
+        });
+      },
+      codeAutoRetrievalTimeout: (String verificaionID) {
+        print("Timed out");
+        Fluttertoast.showToast(
+          msg: "Timed out. Try again",
+          backgroundColor: Colors.grey,
+          gravity: ToastGravity.BOTTOM,
+        );
+      },
     );
   }
 }

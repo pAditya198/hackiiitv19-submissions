@@ -1,3 +1,4 @@
+import 'package:cmms/pages/register.dart';
 import 'package:cmms/utils/mandiScaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -125,7 +126,11 @@ class _SignInState extends State<SignIn> {
                     ),
                   ),
                   onPressed: () {
-                    _verifyPhoneNumber();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Register()),
+                    );
+                    ;
                   },
                 ),
               ],

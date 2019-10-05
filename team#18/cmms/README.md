@@ -1,16 +1,16 @@
-# cmms
+# ```Central Mandi Management System ( C.M.M.S )```
 
-A new Flutter project.
+### Topic :- "Agriculture & Rural Development - Designing solutions keeping in mind the need to enhance the primary sector of India."
 
-## Getting Started
+<b>Problem</b> : There is a huge problem related to distribution and pricing of produced good.Farmers have to suffer a great deal not just economically but also physically. In cases such as, when their product is not sold they stay back at mandi for nights and return home when the product is sold. They have no home to stay at nights, they have to sleep in trucks.There are lots and lots of problem in the current mandi system, some of them are :
 
-This project is a starting point for a Flutter application.
+* Farmers are unaware of actual price for their prodcuct
 
-A few resources to get you started if this is your first Flutter project:
+* They have to stay back at night in case their product is unsold.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+* Product are sold for lesser rate because they want to sell all of their product in one go.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+and many more.
+
+<b>Our Objectives</b> : We plan to make things easier for farmers to sell their respective crops.
+We want to keep transactions transparent so that real profit is reached to its true owner.

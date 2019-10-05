@@ -1,4 +1,4 @@
-import 'package:cmms/pages/farmerr.dart';
+import 'package:cmms/pages/farmerRegistration.dart';
 import 'package:cmms/utils/mandiScaffold.dart';
 import 'package:flutter/material.dart';
 

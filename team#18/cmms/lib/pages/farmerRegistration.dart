@@ -83,7 +83,7 @@ class _FarmerFormState extends State<FarmerForm> {
                   return InputDecorator(
                     decoration: InputDecoration(
                       icon: const Icon(Icons.home),
-                      labelText: 'Districts',
+                      labelText: 'District',
                     ),
                     isEmpty: _district == '',
                     child: new DropdownButtonHideUnderline(

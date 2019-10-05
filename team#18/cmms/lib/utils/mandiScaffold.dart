@@ -10,7 +10,7 @@ class MandiScaffold extends StatefulWidget {
     this.user,
     this.leading,
   });
-  
+
   final String title;
   final Widget body;
   final Widget leading;
@@ -27,6 +27,7 @@ class _MandiScaffoldState extends State<MandiScaffold> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        centerTitle: true,
         leading: Padding(
           padding: const EdgeInsets.all(10.0),
           child: GestureDetector(

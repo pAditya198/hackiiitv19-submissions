@@ -1,4 +1,5 @@
 import 'package:cmms/pages/farmerRegistration.dart';
+import 'package:cmms/pages/traderRegistration.dart';
 import 'package:cmms/utils/mandiScaffold.dart';
 import 'package:flutter/material.dart';
 
@@ -68,7 +69,7 @@ class _RegisterState extends State<Register> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Register()),
+                      MaterialPageRoute(builder: (context) => TraderForm()),
                     );
                     ;
                   },

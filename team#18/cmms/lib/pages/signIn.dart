@@ -26,108 +26,110 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return MandiScaffold(
         title: "Sign In",
-        body: Padding(
-          padding: EdgeInsets.fromLTRB(20, 80, 20, 0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                height: 200.0,
-                width: 200.0,
-                decoration: new BoxDecoration(
-                  image: DecorationImage(
-                    image: new AssetImage(
-                        'assets/com.creatorscorp.krushidhan.png'),
-                    fit: BoxFit.fill,
-                  ),
-                  shape: BoxShape.circle,
-                ),
-              ),
-              Container(
-                height: 50,
-              ),
-              TextFormField(
-                controller: _phoneController,
-                focusNode: _numberNode,
-                maxLength: 10,
-                keyboardType: TextInputType.phone,
-                inputFormatters: [
-                  WhitelistingTextInputFormatter(
-                    RegExp("[0-9]"),
-                  ),
-                ],
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return "Please enter your phone number";
-                  }
-                  if (value.length != 10) {
-                    return "Please enter 10 digits";
-                  }
-                },
-                decoration: InputDecoration(
-                  errorStyle: TextStyle(color: Colors.white),
-                  filled: true,
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(12.0),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(20, 80, 20, 0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  height: 200.0,
+                  width: 200.0,
+                  decoration: new BoxDecoration(
+                    image: DecorationImage(
+                      image: new AssetImage(
+                          'assets/com.creatorscorp.krushidhan.png'),
+                      fit: BoxFit.fill,
                     ),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                Container(
+                  height: 50,
+                ),
+                TextFormField(
+                  controller: _phoneController,
+                  focusNode: _numberNode,
+                  maxLength: 10,
+                  keyboardType: TextInputType.phone,
+                  inputFormatters: [
+                    WhitelistingTextInputFormatter(
+                      RegExp("[0-9]"),
+                    ),
+                  ],
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return "Please enter your phone number";
+                    }
+                    if (value.length != 10) {
+                      return "Please enter 10 digits";
+                    }
+                  },
+                  decoration: InputDecoration(
+                    errorStyle: TextStyle(color: Colors.white),
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(12.0),
+                      ),
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 0,
+                      ),
+                    ),
+                    hintText: "10-digit mobile number",
+                  ),
+                ),
+                MaterialButton(
+                  child: Text(
+                    "Sign in",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  height: 40,
+                  minWidth: 200,
+                  color: Colors.green,
+                  shape: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(27)),
                     borderSide: BorderSide(
                       color: Colors.white,
                       width: 0,
                     ),
                   ),
-                  hintText: "10-digit mobile number",
+                  onPressed: () {
+                    _verifyPhoneNumber();
+                  },
                 ),
-              ),
-              MaterialButton(
-                child: Text(
-                  "Sign in",
-                  style: TextStyle(color: Colors.white),
-                ),
-                height: 40,
-                minWidth: 200,
-                color: Colors.green,
-                shape: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(27)),
-                  borderSide: BorderSide(
-                    color: Colors.white,
-                    width: 0,
+                Container(
+                  margin: new EdgeInsets.fromLTRB(0, 10, 0, 0),
+                  height: 30,
+                  child: Text(
+                    "Or",
+                    style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
+                    textAlign: TextAlign.center,
                   ),
                 ),
-                onPressed: () {
-                  _verifyPhoneNumber();
-                },
-              ),
-              Container(
-                margin: new EdgeInsets.fromLTRB(0, 10, 0, 0),
-                height: 30,
-                child: Text(
-                  "Or",
-                  style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              MaterialButton(
-                child: Text(
-                  "Register",
-                  style: TextStyle(color: Colors.white),
-                ),
-                height: 40,
-                minWidth: 200,
-                color: Colors.green,
-                shape: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(27)),
-                  borderSide: BorderSide(
-                    color: Colors.white,
-                    width: 0,
+                MaterialButton(
+                  child: Text(
+                    "Register",
+                    style: TextStyle(color: Colors.white),
                   ),
+                  height: 40,
+                  minWidth: 200,
+                  color: Colors.green,
+                  shape: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(27)),
+                    borderSide: BorderSide(
+                      color: Colors.white,
+                      width: 0,
+                    ),
+                  ),
+                  onPressed: () {
+                    _verifyPhoneNumber();
+                  },
                 ),
-                onPressed: () {
-                  _verifyPhoneNumber();
-                },
-              ),
-            ],
+              ],
+            ),
           ),
         ));
   }

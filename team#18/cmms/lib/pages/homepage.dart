@@ -55,12 +55,48 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.4,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        DropdownButton(
+                          isDense: true,
+                          items: states.map((value) {
+                            return DropdownMenuItem(
+                              child: Text(value),
+                              value: value,
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
                   ),
                   Expanded(
                     child: SingleChildScrollView(
                       child: Table(
                         children: <TableRow>[
                           tableHeader(),
+                          tableElements(snapshot),
+                          tableElements(snapshot),
+                          tableElements(snapshot),
+                          tableElements(snapshot),
+                          tableElements(snapshot),
+                          tableElements(snapshot),
+                          tableElements(snapshot),
+                          tableElements(snapshot),
+                          tableElements(snapshot),
+                          tableElements(snapshot),
+                          tableElements(snapshot),
+                          tableElements(snapshot),
+                          tableElements(snapshot),
+                          tableElements(snapshot),
+                          tableElements(snapshot),
+                          tableElements(snapshot),
+                          tableElements(snapshot),
+                          tableElements(snapshot),
+                          tableElements(snapshot),
+                          tableElements(snapshot),
+                          tableElements(snapshot),
+                          tableElements(snapshot),
                         ],
                       ),
                     ),
@@ -72,6 +108,15 @@ class _HomePageState extends State<HomePage> {
         },
       ),
     );
+  }
+
+  List<TableRow> completetable(AsyncSnapshot<QuerySnapshot> snapshot) {
+    List<TableRow> row = List<TableRow>();
+    row.add(tableHeader());
+    for (int i = 0; i < 2; i++) {
+      // row.add(tableElements(snapshot));
+    }
+    return row;
   }
 
   TableRow tableHeader() {
@@ -86,7 +131,15 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  TableRow tableElements() {
-    return TableRow();
+  TableRow tableElements(AsyncSnapshot<QuerySnapshot> snapshot) {
+    return TableRow(
+      children: <Widget>[
+        Text("sundar"),
+        Text("wheat"),
+        Text("20"),
+        Text("100"),
+        Text("200"),
+      ],
+    );
   }
 }

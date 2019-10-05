@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -144,12 +145,57 @@ class _FarmerFormState extends State<FarmerForm> {
                       width: 0,
                     ),
                   ),
-                  onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => FarmerForm()),
-                    // );
-                    _verifyPhoneNumber();
+                  onPressed: () async {
+                    await _auth.verifyPhoneNumber(
+                      phoneNumber: "+91" + _phoneController.text,
+                      codeSent: (String verficationID,
+                          [int resendcodeTimeout]) {
+                        print("Code Sent to device");
+                      },
+                      timeout: Duration(seconds: 30),
+                      verificationFailed: (AuthException exception) {
+                        print("Verification Failed: $exception");
+                        Fluttertoast.showToast(
+                          msg: "Verification Failed",
+                          backgroundColor: Colors.grey,
+                          gravity: ToastGravity.BOTTOM,
+                        );
+                      },
+                      verificationCompleted:
+                          (AuthCredential credentials) async {
+                        print("Phone Verification Complete");
+                        await _auth
+                            .signInWithCredential(credentials)
+                            .then((user) {
+                          Navigator.of(context).pop();
+                          Fluttertoast.showToast(
+                            msg: "Succesfully Registered",
+                            backgroundColor: Colors.grey,
+                            gravity: ToastGravity.BOTTOM,
+                          );
+                        });
+                        print("user: $user");
+                        await Firestore.instance
+                            .collection("farmers")
+                            .document(_phoneController.text)
+                            .setData({
+                          "phone": _phoneController.text,
+                          "name": _nameController.text,
+                          "location": {
+                            "district": _district,
+                            "state": _state,
+                          }
+                        });
+                      },
+                      codeAutoRetrievalTimeout: (String verificaionID) {
+                        print("Timed out");
+                        Fluttertoast.showToast(
+                          msg: "Timed out. Try again",
+                          backgroundColor: Colors.grey,
+                          gravity: ToastGravity.BOTTOM,
+                        );
+                      },
+                    );
                   },
                 ),
               ),
@@ -160,40 +206,5 @@ class _FarmerFormState extends State<FarmerForm> {
     );
   }
 
-  Future<void> _verifyPhoneNumber() async {
-    await _auth.verifyPhoneNumber(
-      phoneNumber: "+91" + _phoneController.text,
-      codeSent: (String verficationID, [int resendcodeTimeout]) {
-        print("Code Sent to device");
-      },
-      timeout: Duration(seconds: 30),
-      verificationFailed: (AuthException exception) {
-        print("Verification Failed: $exception");
-        Fluttertoast.showToast(
-          msg: "Verification Failed",
-          backgroundColor: Colors.grey,
-          gravity: ToastGravity.BOTTOM,
-        );
-      },
-      verificationCompleted: (AuthCredential credentials) async {
-        print("Phone Verification Complete");
-        await _auth.signInWithCredential(credentials).then((user) {
-          Navigator.of(context).pop();
-          Fluttertoast.showToast(
-            msg: "Succesfully Registered",
-            backgroundColor: Colors.grey,
-            gravity: ToastGravity.BOTTOM,
-          );
-        });
-      },
-      codeAutoRetrievalTimeout: (String verificaionID) {
-        print("Timed out");
-        Fluttertoast.showToast(
-          msg: "Timed out. Try again",
-          backgroundColor: Colors.grey,
-          gravity: ToastGravity.BOTTOM,
-        );
-      },
-    );
-  }
+  Future<void> _verifyPhoneNumber() async {}
 }

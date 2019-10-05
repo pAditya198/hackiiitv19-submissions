@@ -22,7 +22,7 @@ class _FarmerFormState extends State<FarmerForm> {
   @override
   Widget build(BuildContext context) {
     return new MandiScaffold(
-      title: "FarmerForm",
+      title: "Farmer Form",
       body: new SafeArea(
           top: false,
           bottom: false,

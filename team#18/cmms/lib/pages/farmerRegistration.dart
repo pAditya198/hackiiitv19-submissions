@@ -167,7 +167,7 @@ class _FarmerFormState extends State<FarmerForm> {
                         await _auth
                             .signInWithCredential(credentials)
                             .then((user) {
-                          Navigator.of(context).pop();
+                          // Navigator.of(context).pop();
                           Fluttertoast.showToast(
                             msg: "Succesfully Registered",
                             backgroundColor: Colors.grey,

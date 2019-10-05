@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
 
   String stateValue = "GJ";
   String districtValue = "gandhinagar";
-  String mandiValue = "prayagraj";
+  // String mandiValue = "prayagraj";
   String commodityValue = "jute";
 
   Future<QuerySnapshot> _mandiFuture;

@@ -49,11 +49,44 @@ class _HomePageState extends State<HomePage> {
               //     i++) {
               // states.add(snapshot.data.documents.length)
               // }
-              return Container();
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.4,
+                  ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Table(
+                        children: <TableRow>[
+                          tableHeader(),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              );
             }
           }
         },
       ),
     );
+  }
+
+  TableRow tableHeader() {
+    return TableRow(
+      children: <Widget>[
+        Text("Mandi"),
+        Text("Commodity"),
+        Text("Price"),
+        Text("Supply"),
+        Text("Demand"),
+      ],
+    );
+  }
+
+  TableRow tableElements() {
+    return TableRow();
   }
 }
